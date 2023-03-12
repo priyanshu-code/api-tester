@@ -1,0 +1,16 @@
+.navbar{
+    display: flex;
+    flex-direction: row;
+    min-width: 100%;
+    max-width: 3rem;
+    align-items: center;
+    padding: 1rem 0;
+    background-color: var(--white-100);
+}
+.nav-header{
+    margin-right: auto;
+    padding-left: 1rem;
+    font-variant-caps: all-small-caps;
+    font-size: xx-large;
+
+}

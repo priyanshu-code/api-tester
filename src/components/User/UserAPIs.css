@@ -1,0 +1,81 @@
+.greeting{
+    font-variant-caps: all-petite-caps;
+}
+.user-api-container{
+    min-height: 100%;   
+    min-width: 100%; 
+    background-color: white;
+    flex-wrap: nowrap;
+    border: 4px solid navy;
+    border-radius: 1rem;
+}
+.user-api-buttons{
+    flex-basis: 30%;
+    min-height:100%;   
+    background-color: white;
+    border-radius: 0.7rem 0 0 0.7rem;
+    padding: 5px ;
+    border-right: 4px solid navy;
+    justify-content: space-between;
+    overflow-y:scroll;
+}
+.user-api-buttons-create{
+    margin: 5px ;
+    cursor: pointer;
+    background-color: rgb(152, 255, 255);
+    border: 3px solid navy;
+    outline: red;
+    min-height: 1.8rem;
+    font-size:1rem;
+    border-radius: 10px;
+    font-variant-caps: all-petite-caps;
+    transition: all 0.2s;
+}
+.user-api-buttons-btn{
+    margin: 5px ;
+    cursor: pointer;
+    background-color: rgb(152, 255, 255);
+    border: 3px solid navy;
+    outline: red;
+    min-height: 1.8rem;
+    font-size:1rem;
+    border-radius: 10px;
+    font-variant-caps: all-petite-caps;
+    transition: all 0.2s;
+}
+.current{
+    font-size:1.1rem;
+}
+
+.single-user-api{
+    flex-basis: 70%;
+    min-height: 100%;   
+    min-width: 10vw;
+    background-color: white;
+    border-radius: 0 0.7rem 0.7rem 0 ;
+    padding: 0.5rem;
+    margin: 0.5rem;
+
+}
+.main-form{
+    min-height: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+.main-form>div>label{
+    font-variant-caps: all-petite-caps;
+}
+.main-form>div>button{
+    font-variant-caps: all-petite-caps;
+}
+
+.header-container{
+    max-width: 90%;
+    justify-content: center;
+}
+.header-container>div{
+    justify-content: space-around;
+}
+.header-container>div>input{
+    max-width: 50%;
+}

@@ -1,0 +1,23 @@
+.register{
+    align-items: center;
+}
+.register-form{
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgb(176, 147, 231);
+    min-width: 40%;
+    min-height: 60vh;
+    border-radius: 10px;
+    border-right: 4px solid purple;
+    border-bottom: 4px solid hwb(300 0% 50% / 1);
+    margin: 1rem 0;
+}
+.form-inputs{
+    margin: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+.form-inputs>label{
+    font-size: large;
+    font-feature-settings: "aalt";
+}
