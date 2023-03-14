@@ -16,13 +16,17 @@ const Login = ()=>{
     }
     return(
         <div className="register flex-col">
-            <form action="" method="POST" className="register-form flex-col" onSubmit={handleSubmit}>
+            <form action="" method="" className="register-form flex-col" onSubmit={handleSubmit}>
                 <label htmlFor="email">e-mail: </label>
                 <input onChange={handleChange} value={form.email} name="email" type="email" placeholder="example@gmail.com"></input>
                 <label htmlFor="password">Password: </label>
                 <input onChange={handleChange} value={form.password} name="password" type="password" placeholder="Password"></input>
                 <input type="submit" value="Submit"></input>
             </form>
+            <a href="" onClick={(e)=>{
+                e.preventDefault()
+                dispatch(changeCurrent("Register"))}
+                }>Not Registered?</a>
         </div>
     )
     

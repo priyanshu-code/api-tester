@@ -12,7 +12,7 @@ const Home = ()=>{
             dispatch(changeCurrent("UserAPIs"))
             }
             else{
-            dispatch(changeCurrent("Register"))
+            dispatch(changeCurrent("Login"))
             }
             }}>Test API</button>
     </main>)

@@ -5,7 +5,7 @@ export const url = "http://localhost:5000/api/v1"
 const initalState = {
     darkMode:false,
     isAuthenticated:false,
-    current:"UserAPIs",
+    current:"Home",
     isLoading:true,
     token:localStorage.getItem("Token") || "",
     errors:""

@@ -16,7 +16,7 @@ const Register = ()=>{
     }
     return(
         <div className="register flex-col">
-            <form action="" method="POST" className="register-form flex-col" onSubmit={handleSubmit}>
+            <form action="" method="" className="register-form flex-col" onSubmit={handleSubmit}>
                 <label htmlFor="username">username: </label>
                 <input onChange={handleChange} value={form.username} name="username" placeholder="username"></input>
                 <label htmlFor="firstName">First name: </label>
@@ -29,6 +29,10 @@ const Register = ()=>{
                 <input onChange={handleChange} value={form.password} name="password" type="password" placeholder="Password"></input>
                 <input type="submit" value="Submit"></input>
             </form>
+            <a href="" onClick={(e)=>{
+                e.preventDefault()
+                dispatch(changeCurrent("Login"))}
+                }>Already Registered?</a>
         </div>
     )
     

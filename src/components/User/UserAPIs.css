@@ -48,6 +48,10 @@
 }
 
 .single-user-api{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     flex-basis: 70%;
     min-height: 100%;   
     min-width: 10vw;

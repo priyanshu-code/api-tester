@@ -6,8 +6,10 @@ const initalState = {
     user:{},
     userAPIs:[],
     isLoading:true,
-    currentAPI:"",
-    errors:""
+    isAPILoading:true,
+    currentAPI:"Create",
+    errors:"",
+    testData:[]
 }
 const setHeader = (token)=>{
     return {headers:{
@@ -49,12 +51,16 @@ async (id,thunkAPI)=>{
 })
 // create new API || add Dispatch
 export const createAPI = createAsyncThunk('/user/createAPI',
-async (id,data,thunkAPI)=>{
+async (data,thunkAPI)=>{
     try {
+        const {customForm,APIHeaders,fields}= data
+        const temp = {...customForm,APIHeaders:APIHeaders,fields:fields}
         const token =thunkAPI.getState('app').app.token
-        const response = await Axios.post(url+`/userAPI/${id}`,data,setHeader(token))
+        const response = await Axios.post(url+`/userAPI/`,temp,setHeader(token))
+        await thunkAPI.dispatch(getAllAPIs())
         return  response.data
     } catch (error) {
+        console.log(error.response)
         return thunkAPI.rejectWithValue(error.response.data.msg)
     }
 })
@@ -62,14 +68,8 @@ async (id,data,thunkAPI)=>{
 export const updateAPI = createAsyncThunk('/user/updateAPI',
 async (data,thunkAPI)=>{
     try {
-        const {customForm,APIHeaders,currentAPI,id} =data
-        let temp
-        if (id){
-         temp= {...customForm,APIHeaders:APIHeaders.filter((item,itemId)=>{
-            return itemId!==Number(id)})}
-        }else{
-            temp = customForm
-        }
+        const {customForm,APIHeaders,currentAPI,fields} =data
+        const temp = {...customForm,APIHeaders:APIHeaders,fields:fields}
         const token =thunkAPI.getState('app').app.token
         const response = await Axios.patch(url+`/userAPI/${currentAPI}`,temp,setHeader(token))
         thunkAPI.dispatch(getAllAPIs())
@@ -83,10 +83,15 @@ async (data,thunkAPI)=>{
 export const deleteAPI = createAsyncThunk('/user/deleteAPI',
 async (id,thunkAPI)=>{
     try {
+        console.log(id)
+        if (id==="Create"){
+            thunkAPI.rejectWithValue("Please save the API first, to delete")
+        }
         const token =thunkAPI.getState('app').app.token
-        const response = await Axios.delete(url+`/userAPI/${id}`,setHeader(token))
-        await thunkAPI.dispatch(getAllAPIs())
-        return  response.data
+        await Axios.delete(url+`/userAPI/${id}`,setHeader(token))
+        thunkAPI.dispatch(getAllAPIs())
+        thunkAPI.dispatch(setCurrentAPI("Create"))
+        return  thunkAPI.fulfillWithValue("SUCCESS")
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data.msg)
     }
@@ -100,6 +105,8 @@ const userAPIsSlice = createSlice({
         },
         setCurrentAPI:(state,actions)=>{
             state.currentAPI=actions.payload
+        },setTestData:(state,actions)=>{
+            state.testData = actions.payload
         }
     },
     extraReducers:{
@@ -112,56 +119,59 @@ const userAPIsSlice = createSlice({
             state.isLoading = false
         },
         [getUser.rejected]:(state,actions)=>{
-            state.errors = actions.payload
             state.isLoading = false
+            state.errors = actions.payload
         },
         //get all APIs
         [getAllAPIs.pending]:(state)=>{
-            state.isLoading = true
+            state.isAPILoading = true
         },
         [getAllAPIs.fulfilled]:(state,actions)=>{
+            state.isAPILoading = false
             state.userAPIs = actions.payload
-            state.isLoading = false
         },
         [getAllAPIs.rejected]:(state,actions)=>{
+            state.isAPILoading = false
             state.errors = actions.payload
-            state.isLoading = false
         },
         // create API
         [createAPI.pending]:(state)=>{
-            state.isLoading = true
+            state.isAPILoading = true
         },
-        [createAPI.fulfilled]:(state)=>{
-            state.isLoading = false
+        [createAPI.fulfilled]:(state,actions)=>{
+            state.isAPILoading = false
+            state.currentAPI = actions.payload.api._id
         },
         [createAPI.rejected]:(state,actions)=>{
+            state.isAPILoading = false
             state.errors = actions.payload
-            state.isLoading = false
         },
         // update API
         [updateAPI.pending]:(state)=>{
-            state.isLoading = false
+            state.isAPILoading = true
         },
-        [updateAPI.fulfilled]:(state)=>{
-            state.isLoading = false
+        [updateAPI.fulfilled]:(state,actions)=>{
+            state.isAPILoading = false
+            state.currentAPI = actions.payload.api._id
         },
         [updateAPI.rejected]:(state,actions)=>{
+            state.isAPILoading = false
             state.errors = actions.payload
-            state.isLoading = false
         },
         //delete API
         [deleteAPI.pending]:(state)=>{
-            state.isLoading = false
+            state.isAPILoading = false
+            state.createAPI = "Create"
         },
         [deleteAPI.fulfilled]:(state,actions)=>{
-            state.isLoading = false
+            state.isAPILoading = false
         },
         [deleteAPI.rejected]:(state,actions)=>{
-            state.isLoading = false
+            state.isAPILoading = false
             state.errors = actions.payload
         }
     }
 })
 
-export const {setIsLoading,setCurrentAPI} = userAPIsSlice.actions
+export const {setIsLoading,setCurrentAPI,setTestData} = userAPIsSlice.actions
 export default userAPIsSlice.reducer
