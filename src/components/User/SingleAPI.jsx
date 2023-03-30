@@ -1,11 +1,10 @@
 import { useState,useEffect } from "react"
 import { useSelector,useDispatch } from "react-redux"
-import { updateAPI,deleteAPI, setCurrentAPI, createAPI,setTestData } from "../../features/user/userAPIsSlice"
+import { updateAPI,deleteAPI, createAPI,setTestData } from "../../features/user/userAPIsSlice"
 import { HandleTest } from "./HandleTest"
 const SingleAPI =()=>{
     const dispatch = useDispatch()
-    // const {darkMode} = useSelector((store)=>store.app)
-    const {errors,userAPIs,isLoading,currentAPI,isAPILoading,testData} = useSelector((store)=>store.userAPIs)
+    const {errors,userAPIs,currentAPI,isAPILoading,testData} = useSelector((store)=>store.userAPIs)
     const [customForm,setCustomForm] = useState({APIName:"",url:"",method:"GET",APIHeaders:[],fields:[]})
     const [APIHeaders,setAPIHeaders] = useState([])
     const [fields,setFields] = useState([])
@@ -96,11 +95,11 @@ const SingleAPI =()=>{
             <form action="" className="main-form flex-col">
                 <div className="flex-row">
                     <label htmlFor="APIName">name: </label>
-                    <input placeholder="name" onChange={handleChange} value={customForm.APIName} type="text" name="APIName"/>
+                    <input className="single-api-input" placeholder="name" onChange={handleChange} value={customForm.APIName} type="text" name="APIName"/>
                 </div>
                 <div className="flex-row">
                     <label htmlFor="url">URL: </label>
-                    <input placeholder="url" onChange={handleChange} value={customForm.url} type="text" name="url"/>
+                    <input className="single-api-input" placeholder="url" onChange={handleChange} value={customForm.url} type="text" name="url"/>
                 </div>
                 <div className="flex-row">
                     <label htmlFor="method">Method: </label>
@@ -108,7 +107,6 @@ const SingleAPI =()=>{
                         <option value={"GET"}>GET</option>
                         <option value={"POST"}>POST</option>
                         <option value={"PATCH"}>PATCH</option>
-                        <option value={"PUT"}>PUT</option>
                         <option value={"DELETE"}>DELETE</option>
                     </select>
                 </div>
@@ -145,7 +143,8 @@ const SingleAPI =()=>{
                     <button onClick={async(e)=>{
                         e.preventDefault()
                         dispatch(updateAPI({customForm,APIHeaders,currentAPI,fields}))
-                        dispatch(setTestData(await HandleTest(customForm)))
+                        const tempData = await HandleTest(customForm)
+                        dispatch(setTestData(tempData))
                     }
                         }>Test API</button>
                     <button onClick={(e)=>{

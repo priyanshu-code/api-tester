@@ -3,9 +3,8 @@ import Axios from "axios";
 export const url = "http://localhost:5000/api/v1"
 // const url = "https://api-tester-0ntm.onrender.com/api/v1"
 const initalState = {
-    darkMode:false,
     isAuthenticated:false,
-    current:"Home",
+    current:"UserAPIs",
     isLoading:true,
     token:localStorage.getItem("Token") || "",
     errors:""
@@ -49,12 +48,6 @@ const appSlice = createSlice({
     name:"app",
     initialState:initalState,
     reducers:{
-        enableDarkMode:(state)=>{
-            state.darkMode = true
-        },
-        disableDarkMode:(state)=>{
-            state.darkMode = false
-        },
         changeCurrent:(state,actions)=>{
             state.current = actions.payload
         },
@@ -112,5 +105,5 @@ const appSlice = createSlice({
     }
 })
 
-export const {enableDarkMode,disableDarkMode,changeCurrent,setIsLoading} = appSlice.actions
+export const {changeCurrent,setIsLoading} = appSlice.actions
 export default appSlice.reducer

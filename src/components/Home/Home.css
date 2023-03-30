@@ -1,0 +1,20 @@
+.home-h1{
+    font-size: 2rem;
+}
+.home-p{
+    font-size: 1.4rem;
+}
+.home-button{
+    padding: 0.5rem 1rem;
+    color: aqua;
+    background-color: black;
+    outline: none;
+    font-size: 120%;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.home-button:hover{
+    font-size: 150%;
+}

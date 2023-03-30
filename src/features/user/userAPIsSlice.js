@@ -9,7 +9,7 @@ const initalState = {
     isAPILoading:true,
     currentAPI:"Create",
     errors:"",
-    testData:[]
+    testData:{}
 }
 const setHeader = (token)=>{
     return {headers:{

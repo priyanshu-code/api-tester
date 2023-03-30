@@ -18,11 +18,7 @@ function UserAPIs (){
             <h1>Loading</h1>
         )
     }
-    console.log({"asmd":"asjd","asmd":"asjd","asmd":"asjd","asmd":"asjd","asmd":"asjd"}.length)
-    console.log(["asmd","asmd","asmd","asmd","asmd","asmd","asmd","asmd","asmd","asmd","asmd"].length)
-    console.log(typeof "")
-    console.log(typeof 1)
-    if(testData!==[]){
+    if(testData!=={}){
         console.log(Object.keys(testData))
         console.log(testData[Object.keys(testData)[0]])
     }
@@ -32,7 +28,7 @@ function UserAPIs (){
     <main>
         <div className="user-api-container flex-row">
             <div className="user-api-buttons flex-col">
-                <button className="user-api-buttons-create" onClick={()=>dispatch(setCurrentAPI("Create"))}>Create New API</button>
+                <button className="user-api-buttons-create" onClick={()=>dispatch(setCurrentAPI("Create"))}>Create</button>
                 {userAPIs.map((item)=>{
                     const {APIName,_id} = item
                     const current = currentAPI===_id?"user-api-buttons-btn current":"user-api-buttons-btn"

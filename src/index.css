@@ -4,6 +4,7 @@ body{
     min-height: 100%;
     margin: 0px;
     padding: 0px;
+    background-image: url('./flower.webp');
 }
 .flex-row{
     display: flex;

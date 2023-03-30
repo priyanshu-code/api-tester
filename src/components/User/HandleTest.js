@@ -15,7 +15,9 @@ export const HandleTest = async (args)=>{
             const data = await response.data
             return data
         } catch (error) {
-            return error.response
+            if (error.response)
+                return error.response
+            return {error}
         }
     }
     if (method==="POST"){
@@ -24,16 +26,9 @@ export const HandleTest = async (args)=>{
             const data = await response.data
             return data
         } catch (error) {
-            return error.response
-        }
-    }
-    if (method==="PUT"){
-        try {
-            const response = await axios.put(url,testFields,{headers})
-            const data = await response.data
-            return data
-        } catch (error) {
-            return error.response
+            if (error.response)
+                return error.response
+            return {error}
         }
     }
     if (method==="DELETE"){
@@ -42,7 +37,9 @@ export const HandleTest = async (args)=>{
             const data = await response.data
             return data
         } catch (error) {
-            return error.response
+            if (error.response)
+                return error.response
+            return {error}
         }
     }
     if (method==="PATCH"){
@@ -51,7 +48,9 @@ export const HandleTest = async (args)=>{
             const data = await response.data
             return data
         } catch (error) {
-            return error.response
+            if (error.response)
+                return error.response
+            return {error}
         }
     }
 }
